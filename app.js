@@ -5,12 +5,9 @@ const {
     EmbedBuilder,
     Events,
     GatewayIntentBits,
-    Partials,
-    REST,
-    Routes
+    Partials
 } = require('discord.js');
 
-const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 const client = new Client({
     intents: [
         GatewayIntentBits.DirectMessages,
@@ -39,21 +36,6 @@ const client = new Client({
         Partials.User
     ]
 });
-
-(async() => {
-    try {
-        console.log('[SERVER] Registering new commands . . .');
-        await rest.put(
-            Routes.applicationCommands(process.env.CLIENT_ID),
-            {
-                body: []
-            }
-        );
-        console.log('[SERVER] Successfully registered new commands . . .');
-    } catch (error) {
-        console.log(error);
-    }
-})();
 
 client.on(Events.ClientReady, (readyClient) => console.log(`[SERVER] ${readyClient.user.username} it's ready!`));
 client.on(Events.GuildMemberAdd, (member) => {

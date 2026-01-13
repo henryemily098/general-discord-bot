@@ -1,0 +1,1 @@
+It just the very basic of Discord Bot.
